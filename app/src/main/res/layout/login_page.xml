@@ -59,6 +59,7 @@
         android:layout_marginTop="30dp"
         android:background="@android:color/darker_gray"
         android:text="LOGIN"
+        android:onClick="loginClick"
         />
 
     <TextView
@@ -86,7 +87,8 @@
         android:background="@android:color/black"
         android:textColor="#ffffff"
         android:textSize="16dp"
-        android:text="Register Now" />
+        android:text="Register Now"
+        android:onClick="createAccountClick"/>
 
 
 </RelativeLayout>
