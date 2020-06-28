@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+
+    tools:context=".loginPage">
+
+    <ImageView
+        android:id="@+id/mainLogo"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="50dp"
+
+        app:srcCompat="@drawable/main_logo" />
+
+    <EditText
+        android:id="@+id/enterUsername"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/mainLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="80dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_action_user"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/enterPassword"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/enterUsername"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_action_password"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/enterPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/darker_gray"
+        android:text="LOGIN"
+        />
+
+    <TextView
+        android:id="@+id/createAccountTxt"
+        android:layout_width="260dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="80dp"
+        android:background="@android:color/white"
+        android:textSize="16dp"
+        android:text="Don't have an account? Join us now!"
+        />
+
+    <Button
+        android:id="@+id/createAccountButton"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/createAccountTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="100dp"
+        android:background="@android:color/black"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:text="Register Now" />
+
+
+</RelativeLayout>
