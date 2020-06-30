@@ -23,7 +23,7 @@ public class loginPage extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void createAccountClick(View view)
+    public void registerClick(View view)
     {
         Intent reg_account = new Intent(this, create_account.class);
         startActivity(reg_account);
