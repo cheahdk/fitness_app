@@ -1,13 +1,20 @@
 package com.example.fitness;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
@@ -20,7 +27,8 @@ public class create_account extends AppCompatActivity{
     EditText inputPassword;
     String password;
     Button createButton;
-    FirebaseAuth fireAuthenticate;
+    ProgressBar progressBar;
+    FirebaseAuth firebaseCreate;
     static int passwordLength = 8;
     static int usernameLength = 3;
 
@@ -51,6 +59,7 @@ public class create_account extends AppCompatActivity{
         {
             return false;
         }
+
     }
 
     /* to check for field lengths */
@@ -77,6 +86,7 @@ public class create_account extends AppCompatActivity{
         }
     }
 
+    /* to check for email format */
     private boolean emailFormatCheck()
     {
         String emailFormat = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";    /* abc123!@abc.abc */
@@ -99,6 +109,34 @@ public class create_account extends AppCompatActivity{
         }
     }
 
+    private void createAccount()
+    {
+        final boolean accountCreated = false;
+        int i = 1;
+        splashScreen fAuth = new splashScreen();
+
+        firebaseCreate.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(create_account.this, "Welcome " + username, Toast.LENGTH_SHORT).show();
+                    Intent createSuccess = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(createSuccess);
+                    finish();
+                }
+
+                else
+                {
+                    Toast.makeText(create_account.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        fAuth.setFireAuthenticate(firebaseCreate);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -108,7 +146,12 @@ public class create_account extends AppCompatActivity{
         inputUsername = findViewById(R.id.registerUsername);
         inputEmail = findViewById(R.id.registerEmail);
         inputPassword = findViewById(R.id.registerPassword);
-        fireAuthenticate = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progressBar);
+
+        splashScreen fAuth = new splashScreen();
+        firebaseCreate = fAuth.getFireAuthenticate().getInstance();
+
+
     }
 
     public void createAccountClick(View view)
@@ -116,9 +159,6 @@ public class create_account extends AppCompatActivity{
         username = inputUsername.getText().toString();
         email = inputEmail.getText().toString();
         password = inputPassword.getText().toString();
-        boolean empty_field = false;
-        boolean bad_field_length = false;
-        boolean valid_email = false;
 
         emptyFieldCheck();
 
@@ -134,8 +174,10 @@ public class create_account extends AppCompatActivity{
 
                 if(emailFormatCheck())
                 {
+                    // createAccount();
                     /* Start user registration */
-
+                    progressBar.setVisibility(View.VISIBLE);
+                    createAccount();
                 }
 
             }
